@@ -1,0 +1,63 @@
+---
+---
+
+<section class="pt-32 pb-16 bg-gradient-to-br from-[#7C3AED] to-[#5B21B6] min-h-screen">
+    <div class="mx-auto px-4 max-w-7xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="text-white">
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    Build APIs in minutes, not months
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-200 mb-8">
+                    DevFlow's serverless API platform lets you focus on code, not infrastructure. Scale automatically from prototype to production.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/get-started" class="bg-white text-[#7C3AED] px-4 py-2 rounded-lg hover:bg-gray-100 font-medium transition-colors duration-200">
+                        Get Started Free
+                    </a>
+                    <a href="/docs" class="border border-white text-white px-4 py-2 rounded-lg hover:bg-white/10 font-medium transition-colors duration-200">
+                        View Docs
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="bg-[#1E1E1E] rounded-lg p-4 shadow-xl">
+                    <div class="flex gap-2 mb-4">
+                        <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+                        <span class="ml-2 text-gray-400 text-sm">api.js</span>
+                    </div>
+                    <pre class="text-sm text-gray-300 font-mono"><code>{`import { DevFlow } from '@devflow/api';
+
+// Initialize API endpoint
+const api = new DevFlow.API({
+    name: 'users-api',
+    auth: true
+});
+
+// Create a new user
+api.post('/users', async (req, res) => {
+    const user = await db.users.create(req.body);
+    return res.json(user);
+});
+
+// Deploy with a single command
+api.deploy();`}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    pre {
+        overflow-x: auto;
+        padding: 1rem;
+        background-color: #1E1E1E;
+        border-radius: 0.5rem;
+    }
+    code {
+        white-space: pre;
+    }
+</style>
