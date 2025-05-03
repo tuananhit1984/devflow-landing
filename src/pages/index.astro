@@ -1,14 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+// This is the main page of the application.
+// It imports and renders the Navbar, Hero, and Features components inside a Layout.
+// To add a comment in Astro files, use double slashes (//) for single-line comments above or within the frontmatter (the section between ---).
+// For HTML-like markup outside the frontmatter, use standard HTML comments: <!-- This is a comment -->
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Features from '../components/Features.astro';
 ---
 
-<Layout title="DevFlow - Build APIs in minutes, not months">
-	<main>
-		<Navbar />
-		<Hero />
-		<Features />
-	</main>
+<Layout>
+	<Navbar />
+	<Hero />
+	<Features />
 </Layout>
