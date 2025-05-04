@@ -1,10 +1,15 @@
 ---
+import CodeExample from './CodeExample.astro';
+import { codeExamples } from '../data/codeExamples';
+
 const tabs = [
     { id: 'rest', label: 'REST API', active: true },
     { id: 'graphql', label: 'GraphQL', active: false },
     { id: 'webhooks', label: 'Webhooks', active: false },
     { id: 'authentication', label: 'Authentication', active: false },
 ];
+
+const activeTab = tabs.find(tab => tab.active)?.id || 'rest';
 ---
 
 <section class="py-24 bg-white">
@@ -16,9 +21,10 @@ const tabs = [
             </p>
         </div>
 
-        <div class="flex justify-center space-x-4 mb-8">
+        <div class="flex justify-center space-x-4 mb-8" id="tabs">
             {tabs.map(tab => (
                 <button
+                    data-tab={tab.id}
                     class={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
                         tab.active 
                             ? 'bg-primary text-white' 
@@ -30,63 +36,7 @@ const tabs = [
             ))}
         </div>
 
-        <div class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl">
-            <div class="flex items-center px-4 py-2 bg-[#2D2D2D]">
-                <div class="flex space-x-2">
-                    <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-                </div>
-                <span class="ml-4 text-sm text-gray-400">todo-api.js</span>
-            </div>
-            <div class="p-6">
-                <pre class="text-sm leading-relaxed"><code class="text-gray-300">import { DevFlow } from '@devflow/api';
-import { db } from '@devflow/database';
-
-// Initialize and configure API
-const api = new DevFlow.API({
-    name: 'todo-api',
-    cors: true,
-    rateLimit: { max: 100, windowMs: 60000 }
-});
-
-// Create a new todo
-api.post('/todos', async (req, res) => {
-    const { title, description } = req.body;
-    
-    // Validate input
-    if (!title) {
-        return res.status(400).json({
-            error: 'Title is required'
-        });
-    }
-
-    // Create record in database
-    const todo = await db.todos.create({
-        title,
-        description,
-        completed: false,
-        userId: req.user.id,
-        createdAt: new Date()
-    });
-
-    return res.status(201).json(todo);
-});
-
-// List all todos for the authenticated user
-api.get('/todos', async (req, res) => {
-    const todos = await db.todos.findMany({
-        where: { userId: req.user.id },
-        orderBy: { createdAt: 'desc' }
-    });
-
-    return res.json(todos);
-});
-
-// One command deployment
-api.deploy();</code></pre>
-            </div>
-        </div>
+        <CodeExample filename={codeExamples[activeTab].filename} code={codeExamples[activeTab].code} />
 
         <div class="text-center mt-8">
             <a href="/docs" class="text-primary hover:text-primary-dark font-medium">
@@ -95,6 +45,32 @@ api.deploy();</code></pre>
         </div>
     </div>
 </section>
+
+<script>
+    const tabs = document.querySelectorAll('[data-tab]');
+    const examples = document.querySelectorAll('[data-example]');
+    const codeExamples = {examples};
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            tabs.forEach(t => {
+                t.classList.remove('bg-primary', 'text-white');
+                t.classList.add('text-gray-600', 'hover:text-primary');
+            });
+
+            // Add active class to clicked tab
+            tab.classList.remove('text-gray-600', 'hover:text-primary');
+            tab.classList.add('bg-primary', 'text-white');
+
+            // Show the selected example
+            const tabId = tab.getAttribute('data-tab');
+            examples.forEach(example => {
+                example.style.display = example.getAttribute('data-example') === tabId ? 'block' : 'none';
+            });
+        });
+    });
+</script>
 
 <style>
     pre {

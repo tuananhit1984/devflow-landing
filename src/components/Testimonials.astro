@@ -1,0 +1,59 @@
+---
+const testimonials = [
+    {
+        name: "Sarah Chen",
+        role: "Lead Engineer, TechCorp",
+        quote: "DevFlow reduced our API development time by 70%. The automatic scaling handled our traffic spikes flawlessly during our product launch."
+    },
+    {
+        name: "Carlos Rodriguez",
+        role: "CTO, StartupX",
+        quote: "With DevFlow, we built and deployed our entire API infrastructure in a single day. The built-in auth and database integrations saved us months of work."
+    },
+    {
+        name: "Priya Patel",
+        role: "Indie Developer",
+        quote: "As a solo developer, DevFlow's free tier gave me everything I needed to launch my side project. The community has been incredibly helpful whenever I got stuck."
+    }
+];
+
+const trustedCompanies = [
+    "Company1", "Company2", "Company3", "Company4", "Company5", "Company6"
+];
+---
+
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16">
+            Trusted by developers worldwide
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
+            {testimonials.map(testimonial => (
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-semibold text-gray-900">{testimonial.name}</h3>
+                            <p class="text-sm text-gray-500">{testimonial.role}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">"{testimonial.quote}"</p>
+                </div>
+            ))}
+        </div>
+
+        <div class="text-center">
+            <p class="text-sm font-medium text-gray-500 mb-8">TRUSTED BY COMPANIES OF ALL SIZES</p>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center justify-items-center opacity-50">
+                {trustedCompanies.map(company => (
+                    <div class="h-8 w-32 bg-gray-200 rounded"></div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>

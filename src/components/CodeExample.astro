@@ -1,0 +1,32 @@
+---
+interface Props {
+    code: string;
+    filename: string;
+}
+
+const { code, filename } = Astro.props;
+---
+
+<div class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl">
+    <div class="flex items-center px-4 py-2 bg-[#2D2D2D]">
+        <div class="flex space-x-2">
+            <div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+        </div>
+        <span class="ml-4 text-sm text-gray-400">{filename}</span>
+    </div>
+    <div class="p-6">
+        <pre class="text-sm leading-relaxed"><code class="text-gray-300">{code}</code></pre>
+    </div>
+</div>
+
+<style>
+    pre {
+        overflow-x: auto;
+    }
+    code {
+        font-family: 'Fira Code', 'Consolas', monospace;
+        white-space: pre;
+    }
+</style>
